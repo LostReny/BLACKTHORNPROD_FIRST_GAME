@@ -27,11 +27,13 @@ public class Enemy : MonoBehaviour
     {
         if (other.tag == "Hole")
         {
+            player.AddScore();
             Destroy(gameObject);
         }
 
         if (other.tag == "Player" || other.tag == "Enemy")
         {
+            player.TakeDamage();
             speed = 0;
             transform.parent = player.transform;
         }
