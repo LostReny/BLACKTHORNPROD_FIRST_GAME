@@ -7,6 +7,8 @@ public class Enemy : MonoBehaviour
     public float speed;
     Player player;
 
+    bool inactive = false; 
+
     private void Start()
     {
         // find a object with player script
@@ -25,18 +27,22 @@ public class Enemy : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag == "Hole")
+        if(inactive == false)
         {
-            player.AddScore();
-            Destroy(gameObject);
-        }
+            if (other.tag == "Hole")
+            {
+                player.AddScore();
+                Destroy(gameObject);
+            }
 
-        if (other.tag == "Player" || other.tag == "Enemy")
-        {
-            player.TakeDamage();
-            speed = 0;
-            transform.parent = player.transform;
+            if (other.tag == "Player" || other.tag == "Enemy")
+            {
+                player.TakeDamage();
+                speed = 0;
+                transform.parent = player.transform;
+            }
         }
+        inactive = true;
     }
 
 }
