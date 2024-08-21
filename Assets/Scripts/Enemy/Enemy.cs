@@ -23,5 +23,18 @@ public class Enemy : MonoBehaviour
         transform.position = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
     }
 
+    public void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.tag == "Hole")
+        {
+            Destroy(gameObject);
+        }
+
+        if (other.tag == "Player" || other.tag == "Enemy")
+        {
+            speed = 0;
+            transform.parent = player.transform;
+        }
+    }
 
 }
